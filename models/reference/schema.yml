@@ -1,0 +1,27 @@
+version: 2
+models:
+  - name: countries
+    description: 'Reference table for countries'
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: name
+        tests:
+          - not_null
+      - name: iso_code
+        tests:
+          - unique
+  - name: regions
+    description: 'Reference table for regions/states'
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
+      - name: country_id
+        tests:
+          - relationships:
+              to: ref('countries')
+              field: id
