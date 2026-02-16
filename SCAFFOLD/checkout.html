@@ -3,120 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>Checkout - E-commerce</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="data.js"></script>
+    <script defer src="script.js" data-page="checkout"></script>
 </head>
 <body>
-
-<header>
-    <nav>
-        <a href="cart.html">Back to Cart</a>
+    <nav class="navbar container">
+        <a href="cart.html">← Back to Cart</a>
+        <a href="index.html">Home</a>
     </nav>
-</header>
 
-<div class="checkout-container">
-
-    <!-- Cart Summary -->
-    <section id="cart-summary">
-        <h2>Your Cart (<span>3</span> items)</h2>
-        <ul>
-            <li>
-                <img src="item1.jpg" alt="Item 1">
-                <span>Name: Item 1</span>
-                <span>Variant: Variant 1</span>
-                <span>Qty: <input type="number" value="1" disabled></span>
-                <span>Price: $20.00</span>
-                <span>Line Total: $20.00</span>
-            </li>
-            <li>
-                <img src="item2.jpg" alt="Item 2">
-                <span>Name: Item 2</span>
-                <span>Variant: Variant 2</span>
-                <span>Qty: <input type="number" value="1" disabled></span>
-                <span>Price: $30.00</span>
-                <span>Line Total: $30.00</span>
-            </li>
-            <li>
-                <img src="item3.jpg" alt="Item 3">
-                <span>Name: Item 3</span>
-                <span>Variant: Variant 3</span>
-                <span>Qty: <input type="number" value="1" disabled></span>
-                <span>Price: $40.00</span>
-                <span>Line Total: $40.00</span>
-            </li>
-        </ul>
-        <div class="total">
-            <p><strong>Subtotal:</strong> $90.00</p>
-            <p><strong>Total:</strong> $90.00</p>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div id="order-summary" class="cart-items"></div>
+        <form id="checkout-form" class="checkout-form">
+            <h2>Shipping Information</h2>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" required>
+            </div>
+            <div class="form-group">
+                <label for="zip">ZIP Code</label>
+                <input type="text" id="zip" required>
+            </div>
+            <h2>Payment Information</h2>
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry">Expiry (MM/YY)</label>
+                <input type="text" id="expiry" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" required>
+            </div>
+            <button type="submit" class="btn btn-submit">Place Order</button>
+        </form>
+        <div id="thank-you" style="display: none; text-align: center; padding: 2rem;">
+            <h2>Thank you for your order!</h2>
+            <p>Your order has been placed successfully.</p>
+            <a href="index.html" class="btn">Continue Shopping</a>
         </div>
-    </section>
-
-    <!-- Checkout Form -->
-    <form id="checkout-form" aria-labelledby="checkout-title">
-        <h2 id="checkout-title">Checkout Information</h2>
-        
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required placeholder="John Doe">
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
-        
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" required placeholder="123 Main St, Anytown">
-
-        <div class="grid">
-            <div>
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" required>
-            </div>
-            <div>
-                <label for="state">State:</label>
-                <input type="text" id="state" name="state" length="2" required>
-            </div>
-            <div>
-                <label for="zip">Zip Code:</label>
-                <input type="text" id="zip" name="zip" required>
-            </div>
-        </div>
-
-        <label for="payment-method">Payment Method:</label>
-        <select id="payment-method" name="payment-method" required aria-label="Choose payment method">
-            <option value=""></option>
-            <option value="cc">Credit Card</option>
-            <option value="paypal">PayPal</option>
-        </select>
-
-        <!-- Credit card fields (hidden by default) -->
-        <fieldset id="cc-fields" class="hidden">
-            <label for="cc-name">Cardholder Name:</label>
-            <input type="text" id="cc-name" name="cc-name" required>
-            
-            <label for="cc-number">Card Number:</label>
-            <input type="text" id="cc-number" name="cc-number" required placeholder="XXXX-XXXX-XXXX-XXXX">
-            
-            <div class="grid">
-                <div>
-                    <label for="cc-exp-date">Expiration Date (MM/YY):</label>
-                    <input type="text" id="cc-exp-date" name="cc-exp-date" required>
-                </div>
-                <div>
-                    <label for="cc-cvc">CVC Number:</label>
-                    <input type="password" id="cc-cvc" name="cc-cvc" required>
-                </div>
-            </div>
-        </fieldset>
-
-        <button type="submit">Place Order</button>
-    </form>
-
-    <!-- Success message -->
-    <div id="success" class="hidden">
-        <h2>Thank You!</h2>
-        <p>Your order has been successfully placed.</p>
     </div>
-
-</div>
-
 </body>
 </html>

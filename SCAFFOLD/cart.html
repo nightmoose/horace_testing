@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopping Cart</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - E-commerce</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="data.js"></script>
+    <script defer src="script.js" data-page="cart"></script>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="checkout.html">Checkout</a></li>
-      </ul>
+    <nav class="navbar container">
+        <a href="index.html">← Home</a>
+        <span>Cart (<span id="cart-count">0</span>)</span>
     </nav>
-  </header>
 
-  <main id="cart">
-    <div id="cart-content" role="region" aria-live="polite" aria-relevant="additions removals">
-      <span id="empty-message" class="hidden">Cart is empty</span>
-      <ul id="cart-items"></ul>
+    <div class="container">
+        <h1>Shopping Cart</h1>
+        <div id="cart-empty" class="empty-state" style="display: none;">
+            Your cart is empty. <a href="index.html">Continue shopping</a>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div id="cart-total" class="subtotal" style="display: none;">
+            Subtotal: $<span id="total-amount">0.00</span>
+            <a href="checkout.html" class="btn">Proceed to Checkout</a>
+        </div>
     </div>
-
-    <div id="subtotal"><strong>Subtotal:</strong> $0.00</div>
-    <div id="total"><strong>Total:</strong> $0.00</div>
-  </main>
-
-  <script src="script.js" defer></script>
 </body>
 </html>
