@@ -1,51 +1,20 @@
-### Implementation Plan v1.1: Add Reference Schema to Conformed Data Foundation Databases (Improved)
+# E-Commerce Front-End Scaffold Plan for SCRUM-1
 
-#### List of Files to Create or Modify
-- **dbt_project.yml**: Configure dbt to map the new `models/reference/` folder to the `reference` schema.
-  Purpose: Central dbt config to define schema overrides for reference models.
-- **models/reference/schema.yml**: Define dbt model documentation and tests for the reference schema models.
-  Purpose: dbt docs generation and validation.
-- **models/reference/countries.sql**: Example static reference model for country lookup table.
-  Purpose: Sample reference data model using dbt seeds or select.
-- **models/reference/regions.sql**: Example reference model for regions/countries hierarchy.
-  Purpose: Demonstrates {{ ref('countries') }} usage.
-- **README.md**: Add section on reference schema usage, manual Snowflake setup, and model references.
-  Purpose: Onboarding and deployment instructions.
-- **models/schema.yml** (if exists, append): Update main models schema to reference the new reference models if needed.
+## Files to Create/Modify
+- **SCAFFOLD/data.json**: JSON array of 12 mock products (categories: Electronics, Clothing, Books, Home; variants: size/color; multiple images, price range $10-500).
+- **SCAFFOLD/index.html**: Product listing page - grid layout, search bar, category filters.
+- **SCAFFOLD/product.html**: Product detail page - image gallery, variants selectors, add-to-cart.
+- **SCAFFOLD/cart.html**: Shopping cart - items list, qty controls, subtotal, remove, proceed to checkout.
+- **SCAFFOLD/checkout.html**: Checkout form - shipping/payment fields, cart summary, place order (simulate).
+- **SCAFFOLD/styles.css**: Global responsive styles (mobile-first, grid/flex, no frameworks).
+- **SCAFFOLD/script.js**: Core logic - load data.json, cart ops (localStorage), page-specific rendering, filters/search.
+- **SCAFFOLD/images/**: Folder for product images (use placeholders/URLs).
 
-#### Brief Description of Each File's Purpose
-- dbt_project.yml: Enables dbt to build models into the correct Snowflake schema.
-- schema.yml files: Metadata for lineage, tests, descriptions.
-- *.sql models: Transform logic for reference data, using {{ ref() }} for inter-model deps.
-- README.md: Guides manual schema creation and verification.
+## High-Level Steps & Dependencies
+1. **Data Prep** (dep: none): Generate data.json with 12 full products.
+2. **HTML Structures** (dep: data.json): Build pages linking &lt;link&gt; styles.css, &lt;script defer&gt; script.js.
+3. **CSS Styling** (dep: HTML): Mobile-first responsive design for all components.
+4. **JS Implementation** (dep: all above): Shared utils (load data/cart), page init functions.
+5. **Integration** (dep: all): Ensure nav/query params, localStorage persistence across pages.
 
-#### High-level Steps and Dependencies
-1. Update/create dbt_project.yml (no dependencies).
-2. Create models/reference/ directory and files (depends on dbt_project.yml config).
-3. Update README.md and any main schema.yml (depends on models created).
-4. Commit, dbt compile/run/test (requires Snowflake schema created manually).
-Dependencies: 
-- DBA to run Snowflake SQL for schema creation/grants in UAT/prod.
-- dbt profiles.yml configured locally/CI for targets.
-
-#### Detailed Subtasks (Updated from v1.0)
-1. **Snowflake Schema Setup (Manual, Documented in README)**:
-   - UAT: `USE DATABASE uat_data_foundation_conformed; CREATE SCHEMA IF NOT EXISTS reference; GRANT USAGE, CREATE TABLE, CREATE VIEW ON SCHEMA reference TO ROLE dbt_role;`
-   - Prod: Similar after UAT.
-
-2. **Repo Changes**:
-   - Implement file changes as listed.
-   - Ensure {{ ref('countries') }} etc. in models.
-
-3. **Testing**:
-   - `dbt deps && dbt compile --models reference`
-   - `dbt run --models +reference`
-   - `dbt test --models +reference`
-
-#### Review Notes
-- Previous score: 8/10
-- Improvements incorporated: Explicit file list, cleaned code blocks, repo-focus, sample files added, dependencies clarified.
-
-#### Success Criteria & Rollback
-- Same as v1.0.
-Score for v1.1: 9/10
+**Notes**: Vanilla only. Responsive. Deployable static site. Full mock data, no placeholders. plan.md created on branch SCRUM-1.

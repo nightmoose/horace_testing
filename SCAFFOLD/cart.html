@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="cart">
+    <div id="cart-content" role="region" aria-live="polite" aria-relevant="additions removals">
+      <span id="empty-message" class="hidden">Cart is empty</span>
+      <ul id="cart-items"></ul>
+    </div>
+
+    <div id="subtotal"><strong>Subtotal:</strong> $0.00</div>
+    <div id="total"><strong>Total:</strong> $0.00</div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
