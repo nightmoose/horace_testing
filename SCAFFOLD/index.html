@@ -3,188 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Catalog</title>
-    <style>
-        /* Basic reset and global styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: space-around;
-        }
-        .search-container {
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-        }
-        .search-container input[type="text"] {
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .category-select {
-            margin-left: 0.5rem;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        main {
-            padding: 2rem;
-        }
-        .product-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            justify-items: center;
-        }
-        @media (min-width: 768px) {
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 1024px) {
-            .product-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        .product-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .product-image {
-            width: 100%;
-            height: auto;
-            transition: transform 0.2s ease-in-out;
-        }
-        .product-image:hover {
-            transform: scale(1.1);
-        }
-        .product-info {
-            padding: 1rem;
-            text-align: center;
-        }
-        .product-name, .product-price {
-            display: block;
-            margin-top: 0.5rem;
-        }
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Home - E-commerce</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js" data-page="index"></script>
 </head>
 <body>
-
-<header>
-    <h1>Product Catalog</h1>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Cart</a></li>
-        </ul>
+    <nav class="navbar container">
+        <a href="index.html">Home</a>
+        <div>
+            <a href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a>
+        </div>
     </nav>
-</header>
 
-<div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search products..." />
-    <select id="categorySelect" class="category-select"></select>
-</div>
+    <div class="container">
+        <div class="search-bar">
+            <input type="search" id="search-input" placeholder="Search products...">
+        </div>
 
-<main>
-    <div class="product-grid" id="productGrid"></div>
-</main>
+        <div class="category-filters">
+            <button class="category-filter active" data-category="all">All</button>
+            <button class="category-filter" data-category="Electronics">Electronics</button>
+            <button class="category-filter" data-category="Clothing">Clothing</button>
+            <button class="category-filter" data-category="Books">Books</button>
+            <button class="category-filter" data-category="Home">Home</button>
+        </div>
 
-<script>
-    // Sample categories data
-    const categories = ["Electronics", "Clothing", "Home & Living", "Beauty"];
-
-    // Populate category select dropdown
-    document.getElementById('categorySelect').innerHTML = `
-        <option value="">All Categories</option>
-        ${categories.map(category => `<option value="${category}">${category}</option>`).join('')}
-    `;
-
-    async function fetchProducts() {
-        try {
-            const response = await fetch('./data.json');
-            const products = await response.json();
-            return products;
-        } catch (error) {
-            console.error('Error fetching products:', error);
-            return [];
-        }
-    }
-
-    async function renderProducts(products, category) {
-        const productGrid = document.getElementById('productGrid');
-        productGrid.innerHTML = '';
-
-        const filteredProducts = category ? products.filter(product => product.category === category) : products;
-
-        filteredProducts.forEach(product => {
-            const card = `
-                <div class="product-card" role="article">
-                    <img src="${product.image}" alt="${product.name}" class="product-image" />
-                    <div class="product-info" aria-label="Product details for ${product.name}">
-                        <h3 class="product-name">${product.name}</h3>
-                        <span class="product-price">$${product.price}</span>
-                        <a href="?id=${product.id}">View Details</a>
-                    </div>
-                </div>
-            `;
-            productGrid.innerHTML += card;
-        });
-    }
-
-    const searchInput = document.getElementById('searchInput');
-    let searchTimer;
-
-    function debounce(func, delay) {
-        return function() {
-            clearTimeout(searchTimer);
-            searchTimer = setTimeout(() => func.apply(this, arguments), delay);
-        };
-    }
-
-    searchInput.addEventListener('input', debounce(async () => {
-        const searchText = searchInput.value;
-        const products = await fetchProducts();
-        const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-            categorySelect.value === product.category
-        );
-        renderProducts(filteredProducts, categorySelect.value);
-    }, 300));
-
-    const categorySelect = document.getElementById('categorySelect');
-    categorySelect.addEventListener('change', async () => {
-        const products = await fetchProducts();
-        renderProducts(products, categorySelect.value);
-    });
-
-    // Initial load
-    (async () => {
-        const products = await fetchProducts();
-        renderProducts(products, '');
-    })();
-</script>
-
+        <div id="product-grid" class="product-grid"></div>
+    </div>
 </body>
 </html>
