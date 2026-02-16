@@ -1,0 +1,242 @@
+/* CSS Reset/Normalize */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body, ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* :root Variables */
+:root {
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #17a2b8;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --bg: white;
+    --border-color: #ced4da;
+    --font-family: Arial, sans-serif;
+    --header-height: 60px;
+}
+
+/* Typography */
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+}
+
+h1, h2, h3, p, button {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: #525f7a;
+}
+
+button {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Header */
+header {
+    background-color: var(--dark);
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Search / Filter */
+.search-filter-form {
+    display: flex;
+    justify-content: space-around;
+}
+
+.search-input, .filter-selects {
+    width: calc(50% - 1rem);
+    flex-basis: 49%;
+}
+
+@media (max-width: 768px) {
+    .search-filter-form {
+        flex-direction: column;
+    }
+    .search-input, .filter-selects {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.product-card {
+    background-color: var(--bg);
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform .3s ease-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image Gallery */
+.image-gallery {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gallery-thumbnail {
+    width: calc(25% - 0.75rem);
+    flex-basis: 24%;
+}
+
+@media (max-width: 768px) {
+    .image-gallery {
+        flex-wrap: wrap;
+    }
+    .gallery-thumbnail {
+        width: calc(33.33% - 1rem);
+        flex-basis: 32%;
+    }
+}
+
+/* Variants Form */
+.variants-form select {
+    margin-top: 0.5rem;
+}
+
+/* Cart Table/Grid */
+.cart-table, .cart-grid {
+    background-color: var(--bg);
+    width: 100%;
+}
+
+.cart-grid tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-grid th, .cart-grid td {
+    padding: 0.75rem;
+    color: #32325d;
+}
+
+@media (max-width: 768px) {
+    .cart-table {
+        display: none;
+    }
+    .cart-grid tr:first-child {
+        border-top: 1px solid var(--border-color);
+    }
+    .cart-grid th, .cart-grid td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Checkout Form */
+.checkout-form-labels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .checkout-form-labels {
+        flex-direction: column;
+    }
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: all .3s ease-in-out;
+}
+
+.btn-primary {
+    color: var(--bg);
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--dark);
+    border-color: var(--dark);
+}
+
+.btn-primary:active {
+    box-shadow: none;
+}
+
+.btn-outline, .btn-primary.outline:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: transparent;
+}
+
+.btn-primary.outline:hover,
+.btn-primary.outline:focus {
+    background-color: var(--dark);
+    border-color: var(--dark);
+}
+
+.btn-primary.outline:active {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+/* Transitions */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+body {
+    transition: background-color .3s ease-in-out;
+}

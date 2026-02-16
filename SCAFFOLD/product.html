@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Product Detail Page</title>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/cart">Cart</a>
+    </nav>
+</header>
+
+<main>
+    <section id="product-detail">
+        <div class="gallery-container" role="region" aria-label="Product Gallery">
+            <img id="main-image" src="" alt="Main Product Image">
+            <ul class="thumbnail-list">
+                <!-- Thumbnails will be dynamically populated by script -->
+            </ul>
+        </div>
+
+        <aside class="product-info">
+            <h1 id="product-name"></h1>
+            <p id="product-price"></p>
+
+            <label for="color-select">Color:</label>
+            <select id="color-select" aria-label="Select Color"></select>
+
+            <label for="size-select">Size:</label>
+            <select id="size-select" aria-label="Select Size"></select>
+
+            <div class="quantity-input">
+                <label for="qty">Qty:</label>
+                <input type="number" id="qty" min="1" value="1">
+            </div>
+
+            <button id="add-to-cart-btn" data-action="addToCart" aria-label="Add to Cart">Add to Cart</button>
+        </aside>
+    </section>
+</main>
+
+<script defer src="script.js"></script>
+
+</body>
+</html>
