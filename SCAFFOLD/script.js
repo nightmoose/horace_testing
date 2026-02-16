@@ -3,19 +3,23 @@
 let products = [];
 let cart = [];
 
-async function init() {
-  try {
-    const response = await fetch('data.json');
-    products = await response.json();
-    attachEventListeners();
-    const page = document.querySelector('script[data-page]')?.dataset.page || 'index';
-    if (page === 'index') {
-      renderProducts(products);
-    }
-    updateCartCount();
-  } catch (error) {
-    console.error('Failed to load products:', error);
+function init() {
+  products = window.productsData || [];
+  if (products.length === 0) {
+    console.error('Failed to load products data');
+    return;
   }
+  attachEventListeners();
+  const page = document.querySelector('script[data-page]')?.dataset.page || 'index';
+  if (page === 'index') {
+    renderProducts(products);
+  }
+  updateCartCount();
+}
+
+function getCart() {
+  const stored = localStorage.getItem('cart') || '[]';
+  return JSON.parse(stored);
 }
 
 function filterProducts(searchTerm = '', category = 'all') {
@@ -82,6 +86,7 @@ function addToCart(productId, variant = null) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
 
+  cart = getCart(); // Load latest cart
   let cartItem = cart.find(item => item.id === productId);
   if (cartItem) {
     cartItem.quantity += 1;
@@ -98,14 +103,8 @@ function addToCart(productId, variant = null) {
   }
 }
 
-function getCart() {
-  const stored = localStorage.getItem('cart');
-  return stored ? JSON.stringify(cart) : [];  // Wait, JSON.parse
-  No, fix later.
-}
-
 function updateCartCount() {
-  cart = JSON.parse(localStorage.getItem('cart') || '[]');
+  cart = getCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const countEl = document.getElementById('cart-count');
   if (countEl) countEl.textContent = totalItems;
