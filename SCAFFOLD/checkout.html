@@ -5,20 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - E-commerce</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="data.js"></script>
     <script defer src="script.js" data-page="checkout"></script>
 </head>
 <body>
     <nav class="navbar container">
-        <a href="index.html">← Home</a>
-        <a href="cart.html">Cart</a>
+        <a href="cart.html">← Back to Cart</a>
+        <a href="index.html">Home</a>
     </nav>
 
     <div class="container">
         <h1>Checkout</h1>
-        <form id="checkout-form">
+        <div id="order-summary" class="cart-items"></div>
+        <form id="checkout-form" class="checkout-form">
+            <h2>Shipping Information</h2>
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
@@ -29,44 +36,29 @@
                 <input type="text" id="city" required>
             </div>
             <div class="form-group">
-                <label for="zip">ZIP</label>
+                <label for="zip">ZIP Code</label>
                 <input type="text" id="zip" required>
             </div>
+            <h2>Payment Information</h2>
             <div class="form-group">
-                <label for="country">Country</label>
-                <select id="country" required>
-                    <option value="">Select</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="GB">United Kingdom</option>
-                    <option value="AU">Australia</option>
-                </select>
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required>
+                <label for="expiry">Expiry (MM/YY)</label>
+                <input type="text" id="expiry" placeholder="MM/YY" required>
             </div>
             <div class="form-group">
-                <label for="card">Card Number</label>
-                <input type="text" id="card" required>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="expiry">Expiry</label>
-                    <input type="month" id="expiry" required>
-                </div>
-                <div class="form-group">
-                    <label for="cvv">CVV</label>
-                    <input type="text" id="cvv" required>
-                </div>
-            </div>
-            <div id="order-summary">
-                <h2>Order Summary</h2>
-                <div id="summary-items"></div>
-                <p>Total: $<span id="summary-total">0.00</span></p>
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" required>
             </div>
             <button type="submit" class="btn btn-submit">Place Order</button>
         </form>
+        <div id="thank-you" style="display: none; text-align: center; padding: 2rem;">
+            <h2>Thank you for your order!</h2>
+            <p>Your order has been placed successfully.</p>
+            <a href="index.html" class="btn">Continue Shopping</a>
+        </div>
     </div>
 </body>
 </html>
