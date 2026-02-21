@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog - E-Commerce</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>E-Commerce Demo</h1>
+    <nav>
+      <a href="index.html">Catalog</a>
+      <a href="cart.html">Cart</a>
+      <a href="checkout.html">Checkout</a>
+    </nav>
+  </header>
+  <main>
+    <input type="text" id="search" placeholder="Search products...">
+    <select id="category">
+      <option value="">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+      <option value="home">Home</option>
+      <option value="books">Books</option>
+    </select>
+    <div id="products"></div>
+  </main>
+  <script src="script.js"></script>
+  <script>
+    initPage();
+    // Attach filter events if not in init
+    document.getElementById('search').oninput = filterProducts;
+    document.getElementById('category').onchange = filterProducts;
+  </script>
+</body>
+</html>
